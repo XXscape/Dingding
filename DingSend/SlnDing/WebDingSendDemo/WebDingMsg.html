@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="scripts/jquery-1.9.1.js"></script>
+    <script src="http://g.alicdn.com/dingding/open-develop/0.7.0/dingtalk.js"></script>
+    <script src="scripts/dingding.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var ticket;
+            //$.get('https://oapi.dingtalk.com/get_jsapi_ticket?access_token=0016c556c0db3fd59039323e8cf5cfbf', { }, function (info) {
+            //    ticket = info;
+            //    console.log(info);
+            //});
+            //console.log(ticket);
+            $("#btnSend").click(function () {
+                dd.biz.ding.post({
+                    users: ['manager5293', '056249054031378935'],//用户列表，工号
+                    corpId: 'dinge714a8d5baa070ee', //企业id
+                    type: 1, //钉类型 1：image  2：link
+                    alertType: 2,
+                    alertDate: { "format": "yyyy-MM-dd HH:mm", "value": new Date().getTime() },
+                    attachment: {
+                        images: [''],
+                    }, //附件信息
+                    text: $('#txtMesg').val(), //消息体
+                    onSuccess: function (info) {
+                        //onSuccess将在点击发送之后调用
+                        alert('Success');
+                        console.log(info);
+                    },
+                    onFail: function (info) {
+                        alert('Fail');
+                        console.log(info);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>测试发送Ding</h1>
+    <input id="txtMesg" type="text" placeholder="请输入要发送的消息.." />
+    <input id="btnSend" type="button" value="Send" />
+</body>
+</html>
